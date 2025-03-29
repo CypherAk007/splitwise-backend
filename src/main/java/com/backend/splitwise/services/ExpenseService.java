@@ -39,6 +39,8 @@ public class ExpenseService {
             User user1 = userRepository.findById(entry.getKey()).orElseThrow(()-> new RuntimeException("User Not Found!!"));
             owedBy.add(new ExpenseUser(expense,entry.getValue(),user1, ExpenseUserType.OWEDBY));
         }
+        System.out.println(paidBy);
+        System.out.println(owedBy);
         expense.setPaidBy(paidBy);
         expense.setOwedBy(owedBy);
         expense.setDescription(description);

@@ -1,6 +1,7 @@
 package com.backend.splitwise;
 
 import com.backend.splitwise.controllers.ExpenseController;
+import com.backend.splitwise.controllers.GroupController;
 import com.backend.splitwise.controllers.UserController;
 import com.backend.splitwise.dtos.authentication.LoginRequestDTO;
 import com.backend.splitwise.dtos.authentication.LoginResponseDTO;
@@ -8,11 +9,15 @@ import com.backend.splitwise.dtos.authentication.SignupRequestDTO;
 import com.backend.splitwise.dtos.authentication.SignupResponseDTO;
 import com.backend.splitwise.dtos.expenses.CreateExpenseRequestDTO;
 import com.backend.splitwise.dtos.expenses.CreateExpenseResponseDTO;
+import com.backend.splitwise.dtos.group.CreateGroupRequestDTO;
+import com.backend.splitwise.dtos.group.CreateGroupResponseDTO;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,10 +26,12 @@ import java.util.Map;
 public class SplitwiseApplication implements CommandLineRunner {
 	private final UserController userController;
 	private final ExpenseController expenseController;
+	private final GroupController groupController;
 
-    public SplitwiseApplication(UserController userController, ExpenseController expenseController) {
+    public SplitwiseApplication(UserController userController, ExpenseController expenseController, GroupController groupController) {
         this.userController = userController;
         this.expenseController = expenseController;
+        this.groupController = groupController;
     }
 
     public static void main(String[] args) {
@@ -58,6 +65,15 @@ public class SplitwiseApplication implements CommandLineRunner {
 
 		System.out.println(loginResponseDTO);
 
+		CreateGroupRequestDTO createGroupRequestDTO = new CreateGroupRequestDTO();
+		createGroupRequestDTO.setName("Goa Group");
+		createGroupRequestDTO.setExpenses(new ArrayList<>());
+		createGroupRequestDTO.setMembers(new ArrayList<>(Arrays.asList(1L,2L)));
+		createGroupRequestDTO.setCreateById(1L);
+		CreateGroupResponseDTO createGroupResponseDTO  = groupController.createGroup(createGroupRequestDTO);
+		System.out.println(createGroupResponseDTO);
+
+
 		CreateExpenseRequestDTO createExpenseRequestDTO = new CreateExpenseRequestDTO();
 		createExpenseRequestDTO.setAmount(100);
 		createExpenseRequestDTO.setDescription("Tender Coconut");
@@ -73,6 +89,22 @@ public class SplitwiseApplication implements CommandLineRunner {
 
 		CreateExpenseResponseDTO createExpenseResponseDTO = expenseController.createExpense(createExpenseRequestDTO);
 		System.out.println(createExpenseResponseDTO);
+
+		CreateExpenseRequestDTO createExpenseRequestDTO1 = new CreateExpenseRequestDTO();
+		createExpenseRequestDTO1.setAmount(100);
+		createExpenseRequestDTO1.setDescription("Tender Coconut");
+		createExpenseRequestDTO1.setGroupId(1L);
+		Map<Long,Double> payers1 = new HashMap<>();
+		payers.put(1L,100.0);
+		Map<Long,Double> owers1 = new HashMap<>();
+		payers1.put(1L,50.0);
+		payers1.put(2L,50.0);
+		createExpenseRequestDTO1.setPayers(payers1);
+		createExpenseRequestDTO1.setOwers(owers1);
+		createExpenseRequestDTO1.setCreatedBy(1L);
+
+		CreateExpenseResponseDTO createExpenseResponseDTO1 = expenseController.createExpense(createExpenseRequestDTO1);
+		System.out.println(createExpenseResponseDTO1);
 
 	}
 }
