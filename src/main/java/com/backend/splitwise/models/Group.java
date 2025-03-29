@@ -1,15 +1,15 @@
 package com.backend.splitwise.models;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity(name = "user_groups")//jpa query name changed
 //@Table(name = "groups") // ✅ Table name changed to "groups" in DB
 public class Group extends BaseModel{

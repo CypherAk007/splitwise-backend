@@ -1,15 +1,15 @@
 package com.backend.splitwise.models;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "expenses")//name of the table should be in plural form so that it dont conflict
 public class Expense extends BaseModel{
     private double amount;

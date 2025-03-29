@@ -7,10 +7,12 @@ import com.backend.splitwise.models.User;
 import com.backend.splitwise.repositories.UserRepository;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
+@Component
 public class HeapStrategy implements SettleUpStrategy{
     private final UserRepository userRepository;
 
@@ -35,23 +37,24 @@ public class HeapStrategy implements SettleUpStrategy{
              }
          }
 
-         while(!(minHeap.isEmpty() && maxHeap.isEmpty()){
+         while(!(minHeap.isEmpty() && maxHeap.isEmpty())){
              UserAmtDS positive = maxHeap.poll();
-             UserAmtDS negitive = maxHeap.poll();
-             User payer = positive.getUser();
-             User payee = negitive.getUser();
+             UserAmtDS negitive = minHeap.poll();
+             System.out.println(positive+" "+negitive);
+             User receiver = positive.getUser();
+             User payer = negitive.getUser();
              double payeeToPayerAmt = Math.min(positive.getAmount(),Math.abs(negitive.getAmount()));
-             Transaction transaction = new Transaction(payer,payee,payeeToPayerAmt);
+             Transaction transaction = new Transaction(payer,receiver,payeeToPayerAmt);
              transactionsList.add(transaction);
 
 //             append back the lefover amount to heap
             double additionalAmountAfterTotaling = positive.getAmount()+negitive.getAmount();
             if(additionalAmountAfterTotaling>0){
-                maxHeap.add(new UserAmtDS(payer,additionalAmountAfterTotaling));
+                maxHeap.add(new UserAmtDS(receiver,additionalAmountAfterTotaling));
                 //if +ve amount left
 //                that means payer has to recieve more
             }else if(additionalAmountAfterTotaling<0) {
-                minHeap.add(new UserAmtDS(payee,additionalAmountAfterTotaling));
+                minHeap.add(new UserAmtDS(payer,additionalAmountAfterTotaling));
                 //if -ve amount left
 //                that means payer(debt full filled).: payee has some more debt to be paid
             }
@@ -59,7 +62,7 @@ public class HeapStrategy implements SettleUpStrategy{
         return transactionsList;
     }
 
-    private List<UserAmtDS> getFinalValues(List<Expense> expenses){
+    public List<UserAmtDS> getFinalValues(List<Expense> expenses){
         List<User> users = userRepository.findAll();
         System.out.println("getFinalValues:: "+ users);
 
@@ -84,11 +87,11 @@ public class HeapStrategy implements SettleUpStrategy{
         }
         return result;
     }
-
 }
 
 @Getter
 @Setter
+@ToString
 class UserAmtDS {
     private User user;
     private double amount;

@@ -1,21 +1,21 @@
 package com.backend.splitwise.models;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
-@ToString
 @Entity(name = "expense_users")
+@AllArgsConstructor
+@NoArgsConstructor
 public class ExpenseUser extends BaseModel{
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) // Avoid unnecessary fetching
     @JoinColumn(name="expense")
+
     private Expense expense;
 
     private double amount;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) // Avoid unnecessary fetching
     private User user;
 
     @Enumerated(value = EnumType.STRING)
