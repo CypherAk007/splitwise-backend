@@ -26,21 +26,21 @@ public class SplitwiseApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		SignupRequestDTO signupRequestDTO = new SignupRequestDTO();
-		signupRequestDTO.setName("Abhishek");
-		signupRequestDTO.setPassword("1234567890");
-		signupRequestDTO.setPhone("1234567890");
-
-		SignupResponseDTO signupResponseDTO = userController.signup(signupRequestDTO);
-		System.out.println(signupResponseDTO);
-
-
-		LoginRequestDTO loginRequestDTO  = new LoginRequestDTO();
-		loginRequestDTO.setPhone("1234567890");
-		loginRequestDTO.setPassword("1234567890");
-
-		LoginResponseDTO loginResponseDTO = userController.login(loginRequestDTO);
-
-		System.out.println(loginResponseDTO);
+//		SignupRequestDTO signupRequestDTO = new SignupRequestDTO();
+//		signupRequestDTO.setName("Abhishek");
+//		signupRequestDTO.setPassword("1234567890");
+//		signupRequestDTO.setPhone("1234567890");
+//
+//		SignupResponseDTO signupResponseDTO = userController.signup(signupRequestDTO);
+//		System.out.println(signupResponseDTO);
+//
+//
+//		LoginRequestDTO loginRequestDTO  = new LoginRequestDTO();
+//		loginRequestDTO.setPhone("1234567890");
+//		loginRequestDTO.setPassword("1234567890");
+//
+//		LoginResponseDTO loginResponseDTO = userController.login(loginRequestDTO);
+//
+//		System.out.println(loginResponseDTO);
 	}
 }

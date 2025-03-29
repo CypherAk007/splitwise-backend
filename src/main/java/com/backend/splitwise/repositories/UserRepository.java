@@ -12,11 +12,11 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User,Long> {
     Optional<User> findByPhone(String phone);
 
-    @Query("SELECT u FROM User u WHERE u.phone = :phone")
-    Optional<User> findSingleByPhone(@Param("phone") String phone);
-
-    @Query("SELECT u FROM User u WHERE u.phone = :phone ORDER BY u.id ASC LIMIT 1")
-    Optional<User> findFirstByPhone(@Param("phone") String phone);
+//    @Query("SELECT u FROM users u WHERE u.phone = :phone")
+//    Optional<User> findSingleByPhone(@Param("phone") String phone);
+////
+//    @Query("SELECT u FROM users u WHERE u.phone = :phone ORDER BY u.id ASC LIMIT 1")
+//    Optional<User> findFirstByPhone(@Param("phone") String phone);
 
 
 }
