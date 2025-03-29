@@ -10,7 +10,6 @@ import com.backend.splitwise.repositories.ExpenseUserRepository;
 import com.backend.splitwise.repositories.GroupRepository;
 import com.backend.splitwise.repositories.UserRepository;
 import com.backend.splitwise.strategy.SettleUpStrategy;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

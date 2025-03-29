@@ -3,13 +3,13 @@ package com.backend.splitwise.dtos.settleup;
 
 
 import com.backend.splitwise.models.User;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Transaction {
     private User payer;
     private User receiver;
