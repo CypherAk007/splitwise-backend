@@ -8,6 +8,7 @@ import lombok.*;
 @Entity(name = "expense_users")
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class ExpenseUser extends BaseModel{
     @ManyToOne(fetch = FetchType.LAZY) // Avoid unnecessary fetching
     @JoinColumn(name="expense")

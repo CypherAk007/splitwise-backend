@@ -8,11 +8,13 @@ import com.backend.splitwise.repositories.UserRepository;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 
 @Component
+@Primary
 public class HeapStrategy implements SettleUpStrategy{
     private final UserRepository userRepository;
 
