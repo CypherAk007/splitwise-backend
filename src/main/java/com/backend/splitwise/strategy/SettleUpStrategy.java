@@ -6,5 +6,5 @@ import com.backend.splitwise.models.Expense;
 import java.util.List;
 
 public interface SettleUpStrategy {
-    List<Transaction> transactions(List<Expense> expenses);
+    List<Transaction> settleUpByStrategy(List<Expense> expenses);
 }
